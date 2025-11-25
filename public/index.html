@@ -154,7 +154,16 @@
       // Receive
       socket.on("chat message", (data) => {
         const item = document.createElement("li");
-        item.innerHTML = `<strong>${data.username}:</strong> ${data.message}`;
+        const dateObj = new Date(data.timestamp);
+        const timeFormat = dateObj.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        item.innerHTML = `
+      <strong>${data.username}:</strong> 
+      ${data.message} 
+      <span style="font-size: 0.75rem; color: #999; margin-left: 10px;">${timeFormat}</span>
+         `;
         messages.appendChild(item);
       });
 
